@@ -1,0 +1,28 @@
+﻿@model Users
+
+<div class="login-container d-flex justify-content-center align-items-center h-100">
+    <div class="login-form bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">User Details</h2>
+
+        <div>
+            <dl class="table">
+                <dt class="col-sm-2">Username:</dt>
+                <dd class="col-sm-10">@Model.Username</dd>
+                <dt class="col-sm-2">Email:</dt>
+                <dd class="col-sm-10">@Model.Email</dd>
+                <dt class="col-sm-2">Role:</dt>
+                <dd class="col-sm-10">@Model.Role</dd>
+                <dt class="col-sm-2">Full Name:</dt>
+                <dd class="col-sm-10">@Model.FullName</dd>
+                <dt class="col-sm-2">Gender:</dt>
+                <dd class="col-sm-10">@Model.Gender</dd>
+                <dt class="col-sm-2">Phone Number:</dt>
+                <dd class="col-sm-10">@Model.PhoneNumber</dd>
+                <dt class="col-sm-2">Nationality:</dt>
+                <dd class="col-sm-10">@Model.Nationality</dd>
+            </dl>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-secondary btn-block">Home Page</a>
+        </div>
+    </div>
+</div>

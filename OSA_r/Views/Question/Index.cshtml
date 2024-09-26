@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Questions>
+
+<div class="justify-content-center align-items-center">
+    <div class="bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Question List</h2>
+
+        <a asp-action="Create" class="btn btn-primary btn-block mb-3">Create New Question</a>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Question Text</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model)
+                {
+                    <tr>
+                        <td>@question.QuestionText</td>
+                        <td style="width:30%">
+                            <a asp-action="Details" asp-route-id="@question.QuestionId" class="btn btn-info">Details</a>
+                            <a asp-action="Update" asp-route-id="@question.QuestionId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@question.QuestionId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

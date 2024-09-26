@@ -1,0 +1,77 @@
+﻿@model ExamQuestionsViewModel
+<div class="justify-content-center align-items-center">
+    <div class="bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Exam Questions List</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Exam Id</th>
+                    <th>Question Id</th>
+                    <th>Question Text</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model.ExamQuestions)
+                {
+                    var questionDetails = Model.Questions.FirstOrDefault(q => q.QuestionId == question.QuestionId);
+                    <tr>
+                        <td>@question.ExamId</td>
+                        <td>@question.QuestionId</td>
+                        <td>@questionDetails?.QuestionText</td>
+                        <td>
+                            @using (Html.BeginForm("RemoveQuestion", "ExamQuestions", new { id = question.QuestionId }, FormMethod.Post))
+                            {
+                                @Html.Hidden("QuestionId", question.QuestionId)
+                                @Html.Hidden("ExamId", question.ExamId)
+                                @Html.Hidden("InstructorId", Model.InstructorId)
+                                <input type="submit" value="RemoveQuestion" class="btn btn-danger btn-block" />
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="justify-content-center align-items-center">
+    <div class="bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">All Questions List</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Question Id</th>
+                    <th>Question Text</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var question in Model.Questions)
+                {
+                    var questionExists = Model.ExamQuestions.Any(eq => eq.QuestionId == question.QuestionId);
+                    if (!questionExists)
+                    {
+                    <tr>
+                        <td>@question.QuestionId</td>
+                        <td>@question.QuestionText</td>
+                        <td>
+                            @using (Html.BeginForm("AddQuestion", "ExamQuestions", new { id = question.QuestionId }, FormMethod.Post))
+                            {
+                                @Html.Hidden("QuestionId", question.QuestionId)
+                                @Html.Hidden("ExamId", Model.ExamId)
+                                @Html.Hidden("InstructorId", Model.InstructorId)
+                                <input type="submit" value="AddQuestion" class="btn btn-primary btn-block" />
+                            }
+                        </td>
+                    </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

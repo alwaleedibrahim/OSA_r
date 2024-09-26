@@ -1,0 +1,31 @@
+﻿@model TakeExamViewModel
+@using Microsoft.AspNetCore.Authentication.JwtBearer
+@using Microsoft.IdentityModel.Tokens
+@using System.Security.Claims;
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var principal = HttpContextAccessor.HttpContext.User;
+    var RoleBasedId = principal.Claims.Where(c => c.Type == ClaimTypes.PrimaryGroupSid).Select(c => c.Value).ToList().FirstOrDefault();
+}
+
+
+<h2>Question @(Model.QuestionIndex + 1) of @Model.TotalQuestions</h2>
+<p>@Model.QuestionText</p>
+
+<form asp-action="SubmitAnswer" method="post">
+    <input type="hidden" asp-for="ExamId" />
+    <input type="hidden" asp-for="QuestionId" />
+    <input type="hidden" asp-for="QuestionIndex" />
+    <input type="hidden" asp-for="TotalQuestions" />
+    <input type="hidden" asp-for="StudentId" value="@RoleBasedId"/>
+
+    @foreach (var option in Model.Options)
+    {
+        <div>
+            <input type="radio" asp-for="SelectedOption" value="@option" required/>
+            <label>@option</label>
+        </div>
+    }
+
+    <button type="submit">Next</button>
+</form>

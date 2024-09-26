@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Exams>
+
+<div class="justify-content-center align-items-center">
+    <div class="bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Available Exams</h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Exam Name</th>
+                    <th>Instructor Id</th>
+                    <th>Exam Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var exam in Model)
+                {
+                    <tr>
+                        <td>@exam.ExamName</td>
+                        <td>@exam.InstructorId</td>
+                        <td>@exam.ExamDate</td>
+                        <td>
+                            <a asp-action="TakeExam" asp-route-examId="@exam.ExamId" class="btn btn-info">Take Exam</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

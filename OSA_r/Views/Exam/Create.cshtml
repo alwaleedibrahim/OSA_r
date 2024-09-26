@@ -1,0 +1,43 @@
+﻿@model CreateExamFormViewModel;
+@using Microsoft.AspNetCore.Authentication.JwtBearer
+@using Microsoft.IdentityModel.Tokens
+@using System.Security.Claims;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var principal = HttpContextAccessor.HttpContext.User;
+    var RoleBasedId = principal.Claims.Where(c => c.Type == ClaimTypes.PrimaryGroupSid).Select(c => c.Value).ToList().FirstOrDefault();
+}
+
+@{
+    ViewData["Title"] = "Create New Exam";
+}
+
+<div class="login-container d-flex justify-content-center align-items-center h-100">
+    <div class="login-form bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Create New Exam</h2>
+
+        @using (Html.BeginForm("Create", "Exam", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExamName)
+                <br />
+                @Html.EditorFor(model => model.ExamName, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.InstructorId)
+                <br />
+                <input class="form-control-sm" data-val="true" data-val-required="The InstructorId field is required." id="InstructorId" name="InstructorId" type="number" value=@RoleBasedId readonly>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ExamDate)
+                <br />
+                @Html.EditorFor(model => model.ExamDate, new { @class = "form-control border-primary m-3" })
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary btn-block">Create</button>
+            <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+        }
+    </div>
+</div>

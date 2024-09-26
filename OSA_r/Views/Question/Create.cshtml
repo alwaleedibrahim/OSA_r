@@ -1,0 +1,61 @@
+﻿@model CreateQuestionFormViewModel;
+@using Microsoft.AspNetCore.Authentication.JwtBearer
+@using Microsoft.IdentityModel.Tokens
+@using System.Security.Claims;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@{
+    var principal = HttpContextAccessor.HttpContext.User;
+    var RoleBasedId = principal.Claims.Where(c => c.Type == ClaimTypes.PrimaryGroupSid).Select(c => c.Value).ToList().FirstOrDefault();
+}
+@{
+    ViewData["Title"] = "Create New Question";
+}
+
+<div class="login-container d-flex justify-content-center align-items-center h-100">
+    <div class="login-form bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Create New Question</h2>
+
+        @using (Html.BeginForm("Create", "Question", FormMethod.Post))
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.QuestionText)
+                <br />
+                @Html.EditorFor(model => model.QuestionText, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Subject)
+                <br />
+                @Html.EditorFor(model => model.Subject, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.InstructorId)
+                <br />
+                <input class="form-control-sm" data-val="true" data-val-required="The InstructorId field is required." id="InstructorId" name="InstructorId" type="number" value=@RoleBasedId readonly>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CorrectAnswer)
+                <br />
+                @Html.EditorFor(model => model.CorrectAnswer, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category)
+                <br />
+                @Html.EditorFor(model => model.Category, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Topic)
+                <br />
+                @Html.EditorFor(model => model.Topic, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Level)
+                <br />
+                @Html.DropDownListFor(model => model.Level, new SelectList(Enum.GetValues(typeof(Level))), new { @class = "form-select" })
+            </div>
+            <br />
+            <input type="submit" value="Create" class="btn btn-primary btn-block" />
+        }
+    </div>
+</div>

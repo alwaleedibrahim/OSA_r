@@ -1,0 +1,22 @@
+﻿@model Exams
+<div class="login-container d-flex justify-content-center align-items-center h-100">
+    <div class="login-form bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Exam Details</h2>
+
+        <div>
+            <dl class="table">
+                <dt class="col-sm-2">Exam Name:</dt>
+                <dd class="col-sm-10">@Model.ExamName</dd>
+                <dt class="col-sm-2">Instructor Id:</dt>
+                <dd class="col-sm-10">@Model.InstructorId</dd>
+                <dt class="col-sm-2">Exam Date:</dt>
+                <dd class="col-sm-10">@Model.ExamDate</dd>
+            </dl>
+            <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+            <a asp-controller="ExamQuestions" asp-action="ShowExamQuestions" 
+            asp-route-ExamId="@Model.ExamId" asp-route-InstructorId="@Model.InstructorId" 
+            class="btn btn-primary btn-block">Exam Questions</a>
+        </div>
+    </div>
+</div>

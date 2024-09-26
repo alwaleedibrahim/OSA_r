@@ -1,0 +1,60 @@
+﻿@model EditUserFormViewModel;
+
+@{
+    ViewData["Title"] = "Update New User";
+}
+
+<div class="login-container d-flex justify-content-center align-items-center h-100">
+    <div class="login-form bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">Update User</h2>
+
+        @using (Html.BeginForm("Update", "User", FormMethod.Post))
+        {
+            @Html.HiddenFor(model => model.UserId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username)
+                <br />
+                @Html.EditorFor(model => model.Username, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.FullName)
+                <br />
+                @Html.EditorFor(model => model.FullName, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email)
+                <br />
+                @Html.EditorFor(model => model.Email, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Password)
+                <br />
+                @Html.PasswordFor(model => model.Password)
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNumber)
+                <br />
+                @Html.EditorFor(model => model.PhoneNumber, new { @class = "form-control border-primary m-3" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Role)
+                <br />
+                @Html.DropDownListFor(model => model.Role, new SelectList(Enum.GetValues(typeof(UserRole))), new { @class = "form-select" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Gender)
+                <br />
+                @Html.DropDownListFor(model => model.Gender, new SelectList(Enum.GetValues(typeof(UserGender))), new { @class = "form-select" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Nationality)
+                <br />
+                @Html.DropDownListFor(model => model.Nationality, new SelectList(Enum.GetValues(typeof(Country))), new { @class = "form-select" })
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary btn-block">Update</button>
+            <a asp-action="Index" class="btn btn-secondary btn-block">Back to List</a>
+        }
+    </div>
+</div>

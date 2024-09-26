@@ -1,0 +1,66 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+.login-form {
+    max-width: 400px;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif; /* Change font family */
+    color: #333; /* Change text color */
+}
+
+    .login-form h2 {
+        color: #000; /* Change heading color */
+    }
+
+    .login-form .form-group label {
+        color: #777; /* Change label color */
+    }
+
+    .login-form .form-control {
+        font-size: 18px;
+        padding: 10px;
+        border-color: #ddd; /* Change input border color */
+    }
+
+        .login-form .form-control:focus {
+            border-color: #258cfb; /* Change input focus color */
+        }
+
+    .login-form button[type="submit"] {
+        background-color: #258cfb; /* Change button color */
+        border-color: #258cfb;
+        color: #fff; /* Change button text color */
+        transition: all 0.3s ease-in-out;
+        font-size: 18px;
+        padding: 12px;
+    }
+
+        .login-form button[type="submit"]:hover {
+            background-color: #1b70bf; /* Change button hover color */
+        }
+
+@media (max-width: 576px) {
+    .login-form {
+        max-width: 100%;
+    }
+}

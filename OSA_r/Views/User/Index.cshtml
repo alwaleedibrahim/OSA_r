@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Users>
+
+<div class="justify-content-center align-items-center">
+    <div class="bg-white rounded shadow p-4">
+
+        <h2 class="text-center mb-4">User List</h2>
+
+        <center>
+            <br>
+            <form asp-controller="User" asp-action="Index">
+                <input type="submit" value="Search" class="btn btn-success" />
+                <input type="text" class="from-controle" name="searchval" />
+            </form>
+        </center>
+
+        <a asp-action="Create" class="btn btn-primary btn-block mb-3">Create New User</a>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var user in Model)
+                {
+                    <tr>
+                        <td>@user.Username</td>
+                        <td>@user.Email</td>
+                        <td>@user.Role</td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@user.UserId" class="btn btn-info">Details</a>
+                            <a asp-action="Update" asp-route-id="@user.UserId" class="btn btn-warning">Edit</a>
+                            <a asp-action="Delete" asp-route-id="@user.UserId" class="btn btn-danger">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
